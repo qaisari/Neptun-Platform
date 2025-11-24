@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add User</title>
+    <title>Contact Us</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -83,6 +83,29 @@
         .content {
             padding: 2rem;
         }
+
+        .form-card {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            padding: 2rem;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .form-card h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .form-card p {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+
+        .alert {
+            margin-bottom: 1.5rem;
+        }
     </style>
 </head>
 <body>
@@ -94,43 +117,50 @@
     <div id="page-content-wrapper">
         <nav class="navbar-custom d-flex justify-content-between align-items-center">
             <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
-            <h1 class="mb-0">Dashboard</h1>
+            <h1 class="mb-0">Contact Us</h1>
         </nav>
 
         <div class="content">
-            <h2 th:insert="shared/menu"></h2>
-            <p>Use the sidebar to navigate between different sections.</p>
+            <div class="form-card">
+                <!-- Success Message -->
+                <div th:if="${param.success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                    Thank you! Your message has been sent successfully.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
 
-            <div th:text="${message}" style="color: green"></div>
-            <h1>Admin Menu</h1>
-            <div class="mb-3">
-                <a th:href="@{/admin/add}" class="btn btn-primary">Add a user</a>
-            </div>
-            <div class="card-body">
-                <form th:action="@{/admin/save}" th:object="${user}" method="post">
+                <!-- Error Message -->
+                <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Failed to send message. Please try again.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+                <h2>Get In Touch</h2>
+                <p>Have a question or feedback? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.</p>
+
+                <form th:action="@{/contact}" th:object="${message}" method="post">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Your name" readonly>
                     </div>
+
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="your.email@example.com" readonly>
                     </div>
+
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" th:field="*{password}" required>
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" th:field="*{subject}" placeholder="What is this about?" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="role" class="form-label">Role</label>
-                        <select class="form-select" id="role" th:field="*{role}" required>
-                            <option value="">Select a role</option>
-                            <option value="ROLE_USER">User</option>
-                            <option value="ROLE_ADMIN">Admin</option>
-                        </select>
+                        <label for="messageText" class="form-label">Message</label>
+                        <textarea class="form-control" id="messageText" th:field="*{messageText}" rows="5" placeholder="Your message here..." required></textarea>
                     </div>
+
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary">Add User</button>
-                        <a th:href="@{/admin/menu}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <a th:href="@{/home}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </form>
             </div>

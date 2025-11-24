@@ -2,6 +2,8 @@ package com.example.seminarHomework.core.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -13,6 +15,16 @@ public class User {
     private String password;
     private String role;
 
+    @OneToMany(mappedBy = "user")
+    private List<Message> messages;
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public Long getId() {
         return id;
