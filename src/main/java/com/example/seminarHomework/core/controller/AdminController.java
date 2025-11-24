@@ -2,6 +2,7 @@ package com.example.seminarHomework.core.controller;
 
 import com.example.seminarHomework.core.entity.User;
 import com.example.seminarHomework.core.repository.UserRepo;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,8 @@ public class AdminController {
     @Autowired private UserRepo userRepo;
 
     @GetMapping("/admin/add")
-    public String AddUser(Model model) {
+    public String AddUser(Model model,  HttpServletRequest request) {
+        model.addAttribute("uri", request.getRequestURI());
         model.addAttribute("user", new User());
         return "core/func/addUser";
     }
@@ -33,8 +35,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin/edit/{id}")
-    public String UpdateUser(@PathVariable(name = "id") Long id, Model model) {
+    public String UpdateUser(@PathVariable(name = "id") Long id, Model model,  HttpServletRequest request) {
         if (userRepo.findById(id).isPresent()) {
+            model.addAttribute("uri", request.getRequestURI());
             model.addAttribute("user", userRepo.findById(id).get());
         }
         return "core/func/edit";
@@ -55,7 +58,8 @@ public class AdminController {
     }
 
     @GetMapping("/admin/menu")
-    public String admin(Model model) {
+    public String admin(Model model, HttpServletRequest request) {
+        model.addAttribute("uri", request.getRequestURI());
         model.addAttribute("Users", userRepo.findAll());
         return "core/users/adminMenu";
     }

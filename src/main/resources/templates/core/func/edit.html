@@ -109,20 +109,7 @@
 <body>
 <div id="wrapper">
     <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <div class="sidebar-heading">Student Management</div>
-        <div class="list-group list-group-flush">
-            <span sec:authorize="isAuthenticated()">
-                <a th:href="@{/home}" class="list-group-item list-group-item-action">Home</a>
-            </span>
-            <span sec:authorize="hasRole('ADMIN')">
-                <a th:href="@{/admin/menu}" class="list-group-item list-group-item-action active">Admin</a>
-            </span>
-            <span sec:authorize="isAuthenticated()">
-                    <a th:href="@{/logout}" class="list-group-item list-group-item-action">Logout</a>
-            </span>
-        </div>
-    </div>
+    <div th:insert="shared/sidebar"></div>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">

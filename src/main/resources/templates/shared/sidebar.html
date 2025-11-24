@@ -1,0 +1,29 @@
+<div th:fragment="sidebar" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <div id="sidebar-wrapper">
+        <div class="sidebar-heading">Student Management</div>
+        <div class="list-group list-group-flush">
+            <span sec:authorize="isAuthenticated()">
+                <a th:href="@{/home}" class="list-group-item list-group-item-action"
+                   th:classappend="${uri == '/home'} ? ' active'">Home</a>
+            </span>
+            <span sec:authorize="isAuthenticated()">
+                <a th:href="@{/datamenu}" class="list-group-item list-group-item-action"
+                   th:classappend="${uri.startsWith('/datamenu')} ? ' active' : ''">Database</a>
+            </span>
+            <span sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/admin/menu}" class="list-group-item list-group-item-action"
+                   th:classappend="${uri.startsWith('/admin')} ? ' active' : ''">Admin</a>
+            </span>
+            <span sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}" class="list-group-item list-group-item-action">Logout</a>
+            </span>
+            <span sec:authorize="isAnonymous()">
+                <a th:href="@{/login}" class="list-group-item list-group-item-action">Login</a>
+            </span>
+            <span sec:authorize="isAnonymous()">
+                <a th:href="@{/register}" class="list-group-item list-group-item-action">Register</a>
+            </span>
+        </div>
+    </div>
+</div>

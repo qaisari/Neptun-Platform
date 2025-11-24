@@ -2,6 +2,7 @@ package com.example.seminarHomework.auth.controller;
 
 import com.example.seminarHomework.core.repository.UserRepo;
 import com.example.seminarHomework.core.entity.User;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,11 @@ public class AuthController {
     }
 
     @PostMapping("/saved")
-    public String register(@ModelAttribute("user") User user,  RedirectAttributes redAttr) {
+    public String register(@ModelAttribute("user") User user, RedirectAttributes redAttr,
+                           HttpServletRequest request, Model model) {
         var user1 = userRepo.findByEmail(user.getEmail());
         if (user1.isPresent()) {
-            redAttr.addFlashAttribute("message", "User already exists");
+            model.addAttribute("uri", request.getRequestURI());
             return "redirect:/register?error";
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
