@@ -190,7 +190,7 @@
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2>All Students</h2>
-                <a th:href="@{/crud/students/add}" class="btn btn-primary add-btn">
+                <a th:href="@{/crud/add}" class="btn btn-primary add-btn">
                     <i class="fas fa-plus"></i> Add New Student
                 </a>
             </div>
@@ -198,7 +198,7 @@
             <!-- Students Table -->
             <div class="table-container">
                 <div th:if="${students.isEmpty()}" class="no-data">
-                    <p>No students found. <a th:href="@{/crud/students/add}">Add one now</a></p>
+                    <p>No students found. <a th:href="@{/crud/add}">Add one now</a></p>
                 </div>
 
                 <table th:unless="${students.isEmpty()}" class="table table-striped">
@@ -221,8 +221,8 @@
                                 <span th:unless="${student.boy}" class="badge bg-info">Girl</span>
                             </td>
                             <td>
-                                <a th:href="@{/crud/students/edit/{id}(id=${student.id})}" class="btn btn-sm btn-edit">Edit</a>
-                                <a th:href="@{/crud/students/delete/{id}(id=${student.id})}"
+                                <a th:href="@{/crud/edit/{id}(id=${student.id})}" class="btn btn-sm btn-edit">Edit</a>
+                                <a th:href="@{/crud/delete/{id}(id=${student.id})}"
                                    onclick="return confirm('Are you sure?');" class="btn btn-sm btn-delete">Delete</a>
                             </td>
                         </tr>

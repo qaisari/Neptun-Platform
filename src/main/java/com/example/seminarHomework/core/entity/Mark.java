@@ -1,6 +1,7 @@
 package com.example.seminarHomework.core.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
@@ -13,6 +14,7 @@ public class Mark {
 
     @ManyToOne
     @JoinColumn(name = "studentid")
+    @JsonIgnore
     private Student student;
 
     private Date mdate;

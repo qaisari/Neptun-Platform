@@ -1,6 +1,7 @@
 package com.example.seminarHomework.core.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class Student {
     private int id;
 
     @OneToMany(mappedBy = "student")
+    @JsonIgnore
     private List<Mark> marks;
 
     private String sname;

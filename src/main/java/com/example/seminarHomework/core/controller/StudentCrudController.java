@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/crud/students")
+@RequestMapping("/crud")
 public class StudentCrudController {
     @Autowired private StudentRepo studentRepo;
 

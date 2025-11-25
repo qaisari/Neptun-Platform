@@ -25,11 +25,13 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        //http.csrf(csrf -> csrf.disable())
-        http.authorizeHttpRequests(
+        http.csrf(csrf -> csrf
+                .ignoringRequestMatchers( "/students/**")  // Disable CSRF for API and REST endpoints
+        )
+        .authorizeHttpRequests(
                 auth -> auth
                         .requestMatchers("/", "/css/**", "/js/**", "/images/**", "/saved",
-                                            "/login", "/register", "/resources/**")
+                                            "/login", "/register", "/resources/**", "/students/**")
                         .permitAll()
                         .requestMatchers("/home", "/contact", "/datamenu/**", "/charts", "/api/charts/**", "/crud/students/**").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")

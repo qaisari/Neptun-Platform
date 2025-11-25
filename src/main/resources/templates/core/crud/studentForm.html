@@ -180,7 +180,7 @@
                 <h2 th:if="${student.id == null}">Add New Student</h2>
                 <h2 th:unless="${student.id == null}">Edit Student</h2>
 
-                <form th:action="${student.id == null ? '/crud/students/save' : '/crud/students/update'}"
+                <form th:action="${student.id == null ? '/crud/save' : '/crud/update'}"
                       th:object="${student}" method="post">
 
                     <!-- Hidden ID field for updates -->
@@ -225,7 +225,7 @@
                             <span th:if="${student.id == null}">Add Student</span>
                             <span th:unless="${student.id == null}">Update Student</span>
                         </button>
-                        <a th:href="@{/crud/students}" class="btn-cancel">Cancel</a>
+                        <a th:href="@{/crud}" class="btn-cancel">Cancel</a>
                     </div>
                 </form>
             </div>
