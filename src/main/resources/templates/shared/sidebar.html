@@ -15,6 +15,10 @@
                 <a th:href="@{/contact}" class="list-group-item list-group-item-action"
                    th:classappend="${uri == '/contact'} ? ' active' : ''">Contact</a>
             </span>
+            <span sec:authorize="isAuthenticated()">
+                <a th:href="@{/charts}" class="list-group-item list-group-item-action"
+                   th:classappend="${uri == '/charts'} ? ' active' : ''">Charts</a>
+            </span>
             <span sec:authorize="hasAuthority('ROLE_ADMIN')">
                 <a th:href="@{/admin/menu}" class="list-group-item list-group-item-action"
                    th:classappend="${uri.startsWith('/admin')} ? ' active' : ''">Admin</a>
