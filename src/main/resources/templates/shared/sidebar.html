@@ -19,7 +19,7 @@
                 <a th:href="@{/admin/menu}" class="list-group-item list-group-item-action"
                    th:classappend="${uri.startsWith('/admin')} ? ' active' : ''">Admin</a>
             </span>
-            <span sec:authorize="hasAuthority('ROLE_ADMIN')">
+            <span sec:authorize="isAuthenticated()">
                 <a th:href="@{/messages}" class="list-group-item list-group-item-action"
                    th:classappend="${uri == '/messages'} ? ' active' : ''">Messages</a>
             </span>
