@@ -31,7 +31,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/", "/css/**", "/js/**", "/images/**", "/saved",
                                             "/login", "/register", "/resources/**")
                         .permitAll()
-                        .requestMatchers("/home", "/contact", "/datamenu/**", "/charts", "/api/charts/**").authenticated()
+                        .requestMatchers("/home", "/contact", "/datamenu/**", "/charts", "/api/charts/**", "/crud/students/**").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
         ).formLogin(

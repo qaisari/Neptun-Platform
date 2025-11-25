@@ -19,6 +19,10 @@
                 <a th:href="@{/charts}" class="list-group-item list-group-item-action"
                    th:classappend="${uri == '/charts'} ? ' active' : ''">Charts</a>
             </span>
+            <span sec:authorize="isAuthenticated()">
+                <a th:href="@{/crud/students}" class="list-group-item list-group-item-action"
+                   th:classappend="${uri.startsWith('/crud/students')} ? ' active' : ''">Students CRUD</a>
+            </span>
             <span sec:authorize="hasAuthority('ROLE_ADMIN')">
                 <a th:href="@{/admin/menu}" class="list-group-item list-group-item-action"
                    th:classappend="${uri.startsWith('/admin')} ? ' active' : ''">Admin</a>
