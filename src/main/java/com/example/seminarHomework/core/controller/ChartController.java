@@ -24,7 +24,7 @@ public class ChartController {
         return "core/charts/charts";
     }
 
-    @GetMapping("/api/charts/marks-by-subject")
+    @GetMapping("api/charts/marks-by-subject")
     @ResponseBody
     public Map<String, Object> getMarksBySubject() {
         List<com.example.seminarHomework.core.entity.Mark> marks = new ArrayList<>();
@@ -50,7 +50,7 @@ public class ChartController {
         return response;
     }
 
-    @GetMapping("/api/charts/marks-by-student")
+    @GetMapping("api/charts/marks-by-student")
     @ResponseBody
     public Map<String, Object> getMarksByStudent() {
         List<com.example.seminarHomework.core.entity.Mark> marks = new ArrayList<>();
@@ -76,7 +76,7 @@ public class ChartController {
         return response;
     }
 
-    @GetMapping("/api/charts/mark-distribution")
+    @GetMapping("api/charts/mark-distribution")
     @ResponseBody
     public Map<String, Object> getMarkDistribution() {
         List<com.example.seminarHomework.core.entity.Mark> marks = new ArrayList<>();
@@ -93,7 +93,7 @@ public class ChartController {
         return response;
     }
 
-    @GetMapping("/api/charts/student-count")
+    @GetMapping("api/charts/student-count")
     @ResponseBody
     public Map<String, Object> getStudentCount() {
         List<com.example.seminarHomework.core.entity.Student> students = new ArrayList<>();
@@ -108,7 +108,7 @@ public class ChartController {
         return response;
     }
 
-    @GetMapping("/api/charts/subject-count")
+    @GetMapping("api/charts/subject-count")
     @ResponseBody
     public Map<String, Object> getSubjectCount() {
         List<com.example.seminarHomework.core.entity.Subject> subjects = new ArrayList<>();

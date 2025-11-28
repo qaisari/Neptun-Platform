@@ -209,7 +209,7 @@
     };
 
     // Chart 1: Average Marks by Subject
-    fetch('/api/charts/marks-by-subject')
+    fetch('api/charts/marks-by-subject')
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('marksBySubjectChart').getContext('2d');
@@ -246,7 +246,7 @@
         });
 
     // Chart 2: Average Marks by Student
-    fetch('/api/charts/marks-by-student')
+    fetch('api/charts/marks-by-student')
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('marksByStudentChart').getContext('2d');
@@ -286,7 +286,7 @@
         });
 
     // Chart 3: Mark Distribution
-    fetch('/api/charts/mark-distribution')
+    fetch('api/charts/mark-distribution')
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('markDistributionChart').getContext('2d');
@@ -318,7 +318,7 @@
         });
 
     // Chart 4: Student Gender Distribution
-    fetch('/api/charts/student-count')
+    fetch('api/charts/student-count')
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('studentCountChart').getContext('2d');
@@ -349,7 +349,7 @@
         });
 
     // Chart 5: Subject Mark Counts
-    fetch('/api/charts/subject-count')
+    fetch('api/charts/subject-count')
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById('subjectCountChart').getContext('2d');
