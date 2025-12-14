@@ -1,4 +1,4 @@
-# Java Seminar Homework Project
+# Neptun-Platform Project
 
 ## Project Description
 
