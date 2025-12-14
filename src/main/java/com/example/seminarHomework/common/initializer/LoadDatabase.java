@@ -61,7 +61,7 @@ public class LoadDatabase {
                                 } else {
                                     isBoy = false;
                                 }
-                                studRepo.save(new Student(Integer.parseInt(parts[0]), parts[1], parts[2], isBoy));
+                                studRepo.save(new Student(Long.parseLong(parts[0]), parts[1], parts[2], isBoy));
                             }catch (Exception e) {
                                 log.warn("Failed to parse student line {}: {}", line, e.getMessage());
                             }

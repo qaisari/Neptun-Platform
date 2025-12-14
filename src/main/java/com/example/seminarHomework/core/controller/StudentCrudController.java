@@ -1,6 +1,7 @@
 package com.example.seminarHomework.core.controller;
 
 import com.example.seminarHomework.core.entity.Student;
+import com.example.seminarHomework.core.repository.MarkRepo;
 import com.example.seminarHomework.core.repository.StudentRepo;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/crud")
 public class StudentCrudController {
     @Autowired private StudentRepo studentRepo;
+    @Autowired
+    private MarkRepo markRepo;
 
     // READ - Display all students
     @GetMapping
@@ -36,10 +39,10 @@ public class StudentCrudController {
         try {
             studentRepo.save(student);
             redAttr.addFlashAttribute("message", "Student " + student.getSname() + " added successfully!");
-            return "redirect:/crud/students";
+            return "redirect:/crud";
         } catch (Exception e) {
             redAttr.addFlashAttribute("error", "Error adding student: " + e.getMessage());
-            return "redirect:/crud/students/add";
+            return "redirect:/crud/add";
         }
     }
 
@@ -48,7 +51,7 @@ public class StudentCrudController {
     public String showEditForm(@PathVariable(name = "id") int id, Model model, HttpServletRequest request) {
         Student student = studentRepo.findById(id).orElse(null);
         if (student == null) {
-            return "redirect:/crud/students";
+            return "redirect:/crud";
         }
         model.addAttribute("uri", request.getRequestURI());
         model.addAttribute("student", student);
@@ -61,10 +64,10 @@ public class StudentCrudController {
         try {
             studentRepo.save(student);
             redAttr.addFlashAttribute("message", "Student " + student.getSname() + " updated successfully!");
-            return "redirect:/crud/students";
+            return "redirect:/crud";
         } catch (Exception e) {
             redAttr.addFlashAttribute("error", "Error updating student: " + e.getMessage());
-            return "redirect:/crud/students/edit/" + student.getId();
+            return "redirect:/crud/edit/" + student.getId();
         }
     }
 
@@ -80,7 +83,7 @@ public class StudentCrudController {
         } catch (Exception e) {
             redAttr.addFlashAttribute("error", "Error deleting student: " + e.getMessage());
         }
-        return "redirect:/crud/students";
+        return "redirect:/crud";
     }
 }
 

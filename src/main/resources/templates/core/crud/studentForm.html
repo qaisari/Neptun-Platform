@@ -180,11 +180,9 @@
                 <h2 th:if="${student.id == null}">Add New Student</h2>
                 <h2 th:unless="${student.id == null}">Edit Student</h2>
 
-                <form th:action="${student.id == null ? '/crud/save' : '/crud/update'}"
+                <form th:if="${student.id == null}"
+                      th:action="@{/crud/save}"
                       th:object="${student}" method="post">
-
-                    <!-- Hidden ID field for updates -->
-                    <input type="hidden" th:field="*{id}" />
 
                     <!-- Student ID (read-only for new students) -->
                     <div class="form-group" th:if="${student.id == null}">
@@ -221,9 +219,50 @@
 
                     <!-- Buttons -->
                     <div class="button-group">
-                        <button type="submit" class="btn-submit">
-                            <span th:if="${student.id == null}">Add Student</span>
-                            <span th:unless="${student.id == null}">Update Student</span>
+                        <button th:type="submit" class="btn-submit">
+                            <span>Add Student</span>
+                        </button>
+                        <a th:href="@{/crud}" class="btn-cancel">Cancel</a>
+                    </div>
+                </form>
+                <form th:unless="${student.id == null}"
+                      th:action="@{/crud/update}"
+                      th:object="${student}" method="post">
+
+                    <!-- Hidden ID field for updates -->
+                    <input type="hidden" th:field="*{id}" />
+
+
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" th:field="*{sname}"
+                               placeholder="Enter student name" required>
+                    </div>
+
+                    <!-- Class -->
+                    <div class="form-group">
+                        <label for="classGroup" class="form-label">Class</label>
+                        <input type="text" class="form-control" id="classGroup" th:field="*{classGroup}"
+                               placeholder="e.g., 12/A" required>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="form-group">
+                        <label class="form-label">Gender</label>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="boy" th:field="*{boy}">
+                            <label class="form-check-label" for="boy">
+                                Boy
+                            </label>
+                        </div>
+                        <small class="text-muted">Check if student is a boy, leave unchecked if girl</small>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="button-group">
+                        <button th:type="submit" class="btn-submit">
+                            <span>Update Student</span>
                         </button>
                         <a th:href="@{/crud}" class="btn-cancel">Cancel</a>
                     </div>

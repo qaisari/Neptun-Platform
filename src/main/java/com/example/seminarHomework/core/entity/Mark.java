@@ -13,7 +13,7 @@ public class Mark {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "studentid")
+    @JoinColumn(name = "studentid", nullable = false)
     @JsonIgnore
     private Student student;
 
@@ -22,7 +22,7 @@ public class Mark {
     private String type;
 
     @ManyToOne
-    @JoinColumn(name = "subjectid")
+    @JoinColumn(name = "subjectid", nullable = false)
     private Subject subject;
 
     public Long getId() { return id; }

@@ -1,5 +1,6 @@
 package com.example.seminarHomework.core.controller;
 
+import com.example.seminarHomework.core.entity.Student;
 import com.example.seminarHomework.core.entity.User;
 import com.example.seminarHomework.core.repository.UserRepo;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,16 +12,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
     @Autowired private UserRepo userRepo;
 
-    @GetMapping("/admin/add")
+    @GetMapping("/add")
     public String AddUser(Model model,  HttpServletRequest request) {
         model.addAttribute("uri", request.getRequestURI());
         model.addAttribute("user", new User());
         return "core/func/addUser";
     }
-    @PostMapping("/admin/save")
+    @PostMapping("/save")
     public String saveUser(@ModelAttribute User user, RedirectAttributes redAttr) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -34,7 +36,7 @@ public class AdminController {
         return "redirect:/admin/menu";
     }
 
-    @GetMapping("/admin/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String UpdateUser(@PathVariable(name = "id") Long id, Model model,  HttpServletRequest request) {
         if (userRepo.findById(id).isPresent()) {
             model.addAttribute("uri", request.getRequestURI());
@@ -42,7 +44,7 @@ public class AdminController {
         }
         return "core/func/edit";
     }
-    @PostMapping(value = "/admin/update")
+    @PostMapping(value = "/update")
     public String UpdateUser(@ModelAttribute User user, RedirectAttributes redirAttr){
         if (user.getId() > 0) {
             userRepo.save(user);
@@ -51,13 +53,24 @@ public class AdminController {
         return "redirect:/admin/menu";
     }
 
-    @GetMapping("/admin/delete/{id}")
-    public String DeleteUser(@PathVariable(name = "id") Long id){
-        userRepo.deleteById(id);
+    @GetMapping("/delete/{id}")
+    public String DeleteUser(@PathVariable(name = "id") Long id, RedirectAttributes redAttr){
+        //userRepo.deleteById(id);
+        //return "redirect:/admin/menu";
+
+        try {
+            User user = userRepo.findById(id).orElse(null);
+            if (user != null) {
+                userRepo.deleteById(id);
+                redAttr.addFlashAttribute("message", "User " + user.getName() + " deleted successfully!");
+            }
+        } catch (Exception e) {
+            redAttr.addFlashAttribute("error", "Error deleting student: " + e.getMessage());
+        }
         return "redirect:/admin/menu";
     }
 
-    @GetMapping("/admin/menu")
+    @GetMapping("/menu")
     public String admin(Model model, HttpServletRequest request) {
         model.addAttribute("uri", request.getRequestURI());
         model.addAttribute("Users", userRepo.findAll());
